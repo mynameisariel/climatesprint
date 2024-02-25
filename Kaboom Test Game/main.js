@@ -134,7 +134,6 @@ scene("game", () => {
     ])
 
     function jump() {
-        console.log(player)
         if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
@@ -169,7 +168,7 @@ scene("game", () => {
     onUpdate(() => {
         score++;
         scoreLabel.text = score;
-        if (score == 300){
+        if (score == 600){
             go("industrialEra");
         }
     });
@@ -177,98 +176,109 @@ scene("game", () => {
 
 
 scene("industrialEra", () => {
-    console.log("hello")
     add([
-        text("Climate change is getting worse")
+        sprite("factory"),
+        pos(0, 0)
     ])
+    
+    add([
+        text("Climate change is getting worse.")
+    ])
+
     // add([
     //     sprite("industrialPlane"),
-    //     pos(width()/2, height()/2),
-    //     anchor("botleft"),
+    //     pos(300, 300),
+    //     anchor("topleft"),
     //     scale(2),
+    //     area(),
     //     body({ isStatic: true }),
     //     move(LEFT, SPEED),
     //     "plane",
     // ]);
-
-    // add([
-    //     sprite("factory"),
-    //     pos(0, 0)
-    // ])
-    // // add a game object to screen
-
-    // const player = add([
-    //     // list of components
-    //     sprite("bear1"),
-    //     scale(0.15),
-    //     pos(100, 600),
-    //     area(),
-    //     body(),
-    // ])
+  
     
-    // // water
-    // add([
-    //     sprite("water"),
-    //     pos(0, height()),
-    //     anchor("botleft"),
-    //     area(),
-    //     //move(LEFT, SPEED),
-    // ]);
+    // add a game object to screen
 
-    // //  swimming height
-    // add([
-    //     rect(width(), SWIM_HEIGHT),
-    //     outline(4),
-    //     pos(0, height()),
-    //     anchor("botleft"),
-    //     area(),
-    //     body({ isStatic: true }),
-    //     color(0,0,0,),
-    //     opacity(0),
-    //     "swim"
-    // ])
-
-    // function jump() {
-    //     if (player.isGrounded()) {
-    //         player.jump(JUMP_FORCE);
-    //     }
-    // }
-
-    // // jump when user press space
-    // onKeyPress("w", jump);
-
-    // // movement left and right
-    // onKeyDown("d", () => {
-    //     player.move(MOVEMENTSPEED, 0)
-    // })
-
-    // onKeyDown("a", () => {
-    //     player.move(-MOVEMENTSPEED, 0)
-    // })
+    const player = add([
+        // list of components
+        sprite("bear1"),
+        scale(0.15),
+        pos(100, 600),
+        area(),
+        body(),
+    ])
     
-    // onClick(jump);
+    // water
+    add([
+        sprite("water"),
+        pos(0, height()),
+        anchor("botleft"),
+        area(),
+        //move(LEFT, SPEED),
+    ]);
 
-    // // start spawning ice
-    // spawnIce();
+    //  swimming height
+    add([
+        rect(width(), SWIM_HEIGHT),
+        outline(4),
+        pos(0, height()),
+        anchor("botleft"),
+        area(),
+        body({ isStatic: true }),
+        color(0,0,0,),
+        opacity(0),
+        "swim"
+    ])
 
-    // // keep track of score
-    // let score = 0;
+    function jump() {
+        if (player.isGrounded()) {
+            player.jump(JUMP_FORCE);
+        }
+    }
 
-    // const scoreLabel = add([
-    //     text(score),
-    //     pos(24, 24),
-    // ]);
+    // jump when user press space
+    onKeyPress("w", jump);
 
-    // // increment score every frame
-    // onUpdate(() => {
-    //     score++;
-    //     scoreLabel.text = score;
-    //     if (score == 1200){
-    //         go ("2050");
-    //     }
-    // });
+    // movement left and right
+    onKeyDown("d", () => {
+        player.move(MOVEMENTSPEED, 0)
+    })
+
+    onKeyDown("a", () => {
+        player.move(-MOVEMENTSPEED, 0)
+    })
+    
+    onClick(jump);
+
+    // start spawning ice
+    spawnIce();
+
+    // keep track of score
+    let score = 0;
+
+    const scoreLabel = add([
+        text(score),
+        pos(24, 24),
+    ]);
+
+    // increment score every frame
+    onUpdate(() => {
+        score++;
+        scoreLabel.text = score;
+        if (score == 600){
+            go ("2050");
+        }
+    });
 });
-
+scene ("2050"), ()=> {
+add([
+    sprite("factory2"),
+    pos(0, 0)
+])
+add([
+    text(["Life is getting harder for all living being"])
+])
+}
 scene("lose", (score) => {
 
     add([
